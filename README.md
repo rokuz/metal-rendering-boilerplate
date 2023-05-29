@@ -23,10 +23,10 @@ cmake_minimum_required(VERSION 3.26.4)
 project(<NAME_OF_YOUR_PROJECT>)
 
 # Include dependencies
-include("./deps/metal-rendering-boilerplate/dependencies.cmake")
+include("<PATH_TO_METAL_RENDERING_BOILEPLATE>/dependencies.cmake")
 
 # Enable Metal Rendering Boilerplate
-mrbp_enable("./deps/metal-rendering-boilerplate")
+mrbp_enable("<PATH_TO_METAL_RENDERING_BOILEPLATE>")
 
 # Get source code files
 mrbp_get_sources_from_folder(SRC_LIST src)
@@ -41,7 +41,7 @@ add_library(<NAME_OF_YOUR_CUSTOM_RENDERER> ${SRC_LIST} ${RESOURCE_FOLDER})
 mrbp_set_custom_renderer(<NAME_OF_YOUR_CUSTOM_RENDERER> ${RESOURCE_FOLDER})
 ```
 
-4. Create a class derived from [`mrbp::MetalRenderer`](https://github.com/rokuz/metal-cpp-rendering-boilerplate/blob/main/app/interface/mrbp/MetalRenderer.hpp) class. 
+4. Create a class derived from [`mrbp::MetalRenderer`](https://github.com/rokuz/metal-rendering-boilerplate/blob/main/app/interface/mrbp/MetalRenderer.hpp) class. 
 > Tip: Use template files [`TemplateRenderer.hpp`](https://github.com/rokuz/metal-rendering-boilerplate/blob/main/TemplateRenderer.hpp) and [`TemplateRenderer.mm`](https://github.com/rokuz/metal-rendering-boilerplate/blob/main/TemplateRenderer.mm) for the quick start.
 
 In a mm-file, `createMetalRenderer` and `getLaunchParams` functions must be implemented.
@@ -54,16 +54,16 @@ std::unique_ptr<mrbp::MetalRenderer> createMetalRenderer(id<MTLDevice> _Nonnull 
 mrbp::LaunchParams getLaunchParams();
 ```
 
-List of launch parameters can be found [here](https://github.com/rokuz/metal-cpp-rendering-boilerplate/blob/main/app/interface/mrbp/LaunchParams.hpp);
+List of launch parameters can be found [here](https://github.com/rokuz/metal-rendering-boilerplate/blob/main/app/interface/mrbp/LaunchParams.hpp).
 
-6. Generate XCode project
+5. Generate XCode project
 MacOS:
-```
-cmake -G Xcode -H. -Bbuild
+```bash
+$ cmake -G Xcode -H. -Bbuild
 ```
 iOS:
-```
-cmake -G Xcode -H. -Bbuild -DCMAKE_TOOLCHAIN_FILE=<PATH_TO_METAL_RENDERING_BOILEPLATE>/3party/ios-cmake/ios.toolchain.cmake -DPLATFORM=OS64COMBINED -DDEPLOYMENT_TARGET=14.0
+```bash
+$ cmake -G Xcode -H. -Bbuild -DCMAKE_TOOLCHAIN_FILE=<PATH_TO_METAL_RENDERING_BOILEPLATE>/3party/ios-cmake/ios.toolchain.cmake -DPLATFORM=OS64COMBINED -DDEPLOYMENT_TARGET=14.0
 ```
 
 Happy coding!
