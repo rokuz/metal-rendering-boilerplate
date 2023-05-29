@@ -1,0 +1,6 @@
+[submodule "3party/glm"]
+	path = 3party/glm
+	url = https://github.com/g-truc/glm.git
+[submodule "3party/ios-cmake"]
+	path = 3party/ios-cmake
+	url = https://github.com/leetal/ios-cmake.git

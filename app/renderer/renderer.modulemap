@@ -1,0 +1,6 @@
+framework module renderer {
+  header "renderer.h"
+  
+  header "LaunchParams.h"
+  header "RendererView.h"
+}

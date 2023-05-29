@@ -1,0 +1,10 @@
+// This file is auto-generated. DO NOT MODIFY!
+
+#pragma once
+
+#include <string>
+
+namespace mrbp {
+std::string const kSourceCodeDir = "@CMAKE_SOURCE_DIR@/";
+std::string const kDefaultMetalLib = "default.metallib";
+} // namespace mrbp
