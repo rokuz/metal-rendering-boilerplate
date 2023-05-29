@@ -57,10 +57,12 @@ mrbp::LaunchParams getLaunchParams();
 List of launch parameters can be found [here](https://github.com/rokuz/metal-rendering-boilerplate/blob/main/app/interface/mrbp/LaunchParams.hpp).
 
 5. Generate XCode project
+
 MacOS:
 ```bash
 $ cmake -G Xcode -H. -Bbuild
 ```
+
 iOS:
 ```bash
 $ cmake -G Xcode -H. -Bbuild -DCMAKE_TOOLCHAIN_FILE=<PATH_TO_METAL_RENDERING_BOILEPLATE>/3party/ios-cmake/ios.toolchain.cmake -DPLATFORM=OS64COMBINED -DDEPLOYMENT_TARGET=14.0
