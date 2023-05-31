@@ -14,8 +14,10 @@ struct LauncherApp: App {
       ContentView()
 #if os(macOS)
         .navigationTitle(LaunchParams.windowTitle())
-        .frame(width: LaunchParams.viewportSize().width / (NSScreen.main?.backingScaleFactor ?? 1.0),
-               height: LaunchParams.viewportSize().height / (NSScreen.main?.backingScaleFactor ?? 1.0),
+        .frame(idealWidth: LaunchParams.viewportSize().width / (NSScreen.main?.backingScaleFactor ?? 1.0),
+               maxWidth: .infinity,
+               idealHeight: LaunchParams.viewportSize().height / (NSScreen.main?.backingScaleFactor ?? 1.0),
+               maxHeight: .infinity,
                alignment: .center)
 #else
         .frame(maxWidth: .infinity, maxHeight: .infinity)
