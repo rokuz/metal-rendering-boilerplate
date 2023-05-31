@@ -16,7 +16,11 @@ mrbp::LaunchParams getLaunchParams() {
   return mrbp::LaunchParams{.windowTitle = "Template Renderer"};
 }
 
-id<MTLDevice> _Nonnull createMetalDevice() { return MTLCreateSystemDefaultDevice(); }
+std::shared_ptr<mrbp::MetalDevice> createMetalDevice() {
+  auto device = std::make_shared<mrbp::MetalDevice>();
+  device->metalDevice = MTLCreateSystemDefaultDevice();
+  return device;
+}
 
 constexpr uint32_t kMaxFramesInFlight = 3;
 
