@@ -49,5 +49,7 @@ target_link_libraries(${PROJECT_NAME}
   "-framework ${UI_FRAMEWORK}"
   "-framework Metal"
   "-framework MetalKit"
-  "-framework Quartz"
+  "-framework CoreGraphics"
+  "-framework CoreVideo"
+  "-framework QuartzCore"
 )
