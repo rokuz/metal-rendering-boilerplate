@@ -44,10 +44,13 @@ mrbp_set_custom_renderer(<NAME_OF_YOUR_CUSTOM_RENDERER> ${RESOURCE_FOLDER})
 4. Create a class derived from [`mrbp::MetalRenderer`](https://github.com/rokuz/metal-rendering-boilerplate/blob/main/app/interface/mrbp/MetalRenderer.hpp) class. 
 > Tip: Use template files [`TemplateRenderer.hpp`](https://github.com/rokuz/metal-rendering-boilerplate/blob/main/TemplateRenderer.hpp) and [`TemplateRenderer.mm`](https://github.com/rokuz/metal-rendering-boilerplate/blob/main/TemplateRenderer.mm) for the quick start.
 
-In a mm-file, `createMetalRenderer` and `getLaunchParams` functions must be implemented.
+In a mm-file, `createMetalDevice`, `createMetalRenderer` and `getLaunchParams` functions must be implemented.
 ```cpp
+// It must create and return Metal Device.
+std::shared_ptr<mrbp::MetalDevice> createMetalDevice();
+
 // It must create the `mrbp::MetalRenderer` class's successor instance.
-std::unique_ptr<mrbp::MetalRenderer> createMetalRenderer(id<MTLDevice> _Nonnull device,
+std::unique_ptr<mrbp::MetalRenderer> createMetalRenderer(std::shared_ptr<mrbp::MetalDevice> device,
                                                          glm::uvec2 size,
                                                          MTLPixelFormat colorPixelFormat);
 // It must return launch parameters.

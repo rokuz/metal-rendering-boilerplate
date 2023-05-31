@@ -22,7 +22,7 @@ function(mrbp_enable path_to_boilerplate)
   include_directories(${path_to_boilerplate}/3party/glm)
 
   add_definitions(-DGLM_ENABLE_EXPERIMENTAL -DGLM_FORCE_CTOR_INIT -DGLM_FORCE_RADIANS)
-  add_subdirectory(${path_to_boilerplate}/3party/glm)
+  add_subdirectory(${path_to_boilerplate}/3party/glm glm)
 
   configure_file(
     "${path_to_boilerplate}/mrbp_config.hpp.in"
@@ -54,7 +54,7 @@ function(mrbp_set_custom_renderer custom_renderer_target)
   endif()
 
   # Add mrbp targets
-  add_subdirectory(${MRBP_PATH_TO_BOILERPLATE}/app)
+  add_subdirectory(${MRBP_PATH_TO_BOILERPLATE}/app app)
 
   # Copy default.metallib (if it exists) to the app bundle
   if (PLATFORM_MAC)

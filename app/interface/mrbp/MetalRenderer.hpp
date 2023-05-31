@@ -14,9 +14,7 @@ namespace mrbp {
 
 class MetalRenderer {
 public:
-  MetalRenderer(id<MTLDevice> _Nonnull device,
-                glm::uvec2 size,
-                MTLPixelFormat colorPixelFormat) noexcept {}
+  virtual ~MetalRenderer() = default;
 
   virtual void onResize(glm::uvec2 size) noexcept {}
   virtual void onFrame(std::function<id<CAMetalDrawable> _Nullable()> drawableGetter,
@@ -34,10 +32,17 @@ public:
   // Only iOS
   virtual void onEnterBackground() noexcept {}
 };
+
+struct MetalDevice {
+  id<MTLDevice> _Nonnull metalDevice;
+};
 }  // namespace mrbp
 
 // These functions must be implemented in custom renderer.
-extern std::unique_ptr<mrbp::MetalRenderer> createMetalRenderer(id<MTLDevice> _Nonnull device,
-                                                                glm::uvec2 size,
-                                                                MTLPixelFormat colorPixelFormat);
+extern std::shared_ptr<mrbp::MetalDevice> createMetalDevice();
+
+extern std::unique_ptr<mrbp::MetalRenderer> createMetalRenderer(
+  std::shared_ptr<mrbp::MetalDevice> device,
+  glm::uvec2 size,
+  MTLPixelFormat colorPixelFormat);
 extern mrbp::LaunchParams getLaunchParams();

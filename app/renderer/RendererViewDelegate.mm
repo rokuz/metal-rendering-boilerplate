@@ -5,6 +5,7 @@
 #import "../interface/mrbp/MetalRenderer.hpp"
 
 @interface RendererViewDelegate () {
+  std::shared_ptr<mrbp::MetalDevice> _device;
   std::unique_ptr<mrbp::MetalRenderer> _renderer;
 }
 @end
@@ -16,7 +17,9 @@
   static dispatch_once_t once;
   dispatch_once(&once, ^{
     instance = [[self alloc] init];
-    instance.metalDevice = MTLCreateSystemDefaultDevice();
+    instance->_device = createMetalDevice();
+    assert(instance->_device);
+    instance.metalDevice = instance->_device->metalDevice;
   });
   return instance;
 }
@@ -35,7 +38,7 @@
   self.viewportSize = size;
   if (!_renderer) {
     _renderer = createMetalRenderer(
-      self.metalDevice,
+      self->_device,
       glm::uvec2{static_cast<uint32_t>(size.width), static_cast<uint32_t>(size.height)},
       view.colorPixelFormat);
 #if TARGET_IOS || TARGET_OS_SIMULATOR

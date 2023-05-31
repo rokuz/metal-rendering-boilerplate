@@ -3,24 +3,27 @@
 #include <mrbp/Config.hpp>
 #include <mrbp/Utils.hpp>
 
-std::unique_ptr<mrbp::MetalRenderer> createMetalRenderer(id<MTLDevice> _Nonnull device,
+std::unique_ptr<mrbp::MetalRenderer> createMetalRenderer(std::shared_ptr<mrbp::MetalDevice> device,
                                                          glm::uvec2 size,
                                                          MTLPixelFormat colorPixelFormat) {
-  return std::make_unique<TemplateRenderer>(device, std::move(size), std::move(colorPixelFormat));
+  assert(device);
+  return std::make_unique<TemplateRenderer>(std::move(device),
+                                            std::move(size),
+                                            std::move(colorPixelFormat));
 }
 
 mrbp::LaunchParams getLaunchParams() {
   return mrbp::LaunchParams{.windowTitle = "Template Renderer"};
 }
 
+id<MTLDevice> _Nonnull createMetalDevice() { return MTLCreateSystemDefaultDevice(); }
+
 constexpr uint32_t kMaxFramesInFlight = 3;
 
-TemplateRenderer::TemplateRenderer(id<MTLDevice> _Nonnull device,
+TemplateRenderer::TemplateRenderer(std::shared_ptr<mrbp::MetalDevice> device,
                                    glm::uvec2 size,
                                    MTLPixelFormat colorPixelFormat) noexcept
-  : mrbp::MetalRenderer(device, std::move(size), colorPixelFormat),
-    device_(device),
-    size_(std::move(size)) {
+  : device_(device->metalDevice), size_(std::move(size)) {
   commandQueue_ = [device_ newCommandQueue];
 
   // NOTE: Uncomment for loading default Metal shaders library.

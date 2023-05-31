@@ -37,6 +37,8 @@ set_target_properties(${PROJECT_NAME} PROPERTIES XCODE_ATTRIBUTE_PRODUCT_BUNDLE_
 set_target_properties(${PROJECT_NAME} PROPERTIES XCODE_ATTRIBUTE_DEFINES_MODULE "YES")
 set_target_properties(${PROJECT_NAME} PROPERTIES XCODE_ATTRIBUTE_MODULEMAP_FILE "${CMAKE_CURRENT_SOURCE_DIR}/${PROJECT_NAME}.modulemap")
 
+set_target_properties(${PROJECT_NAME} PROPERTIES XCODE_ATTRIBUTE_CLANG_CXX_LANGUAGE_STANDARD "c++20")
+
 if(PLATFORM_MAC)
   set(UI_FRAMEWORK AppKit)
 elseif(PLATFORM_IOS)
@@ -47,4 +49,5 @@ target_link_libraries(${PROJECT_NAME}
   "-framework ${UI_FRAMEWORK}"
   "-framework Metal"
   "-framework MetalKit"
+  "-framework Quartz"
 )

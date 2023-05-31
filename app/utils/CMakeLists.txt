@@ -9,6 +9,8 @@ set(SRC_LIST
 
 add_library(${PROJECT_NAME} ${SRC_LIST})
 
+set_target_properties(${PROJECT_NAME} PROPERTIES XCODE_ATTRIBUTE_CLANG_CXX_LANGUAGE_STANDARD "c++20")
+
 target_link_libraries(${PROJECT_NAME}
   "-framework Foundation"
   "-framework Metal"

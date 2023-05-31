@@ -5,7 +5,7 @@
 
 class TemplateRenderer : public mrbp::MetalRenderer {
 public:
-  TemplateRenderer(id<MTLDevice> _Nonnull device,
+  TemplateRenderer(std::shared_ptr<mrbp::MetalDevice> device,
                    glm::uvec2 size,
                    MTLPixelFormat colorPixelFormat) noexcept;
 
